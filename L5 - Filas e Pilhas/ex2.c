@@ -79,18 +79,20 @@ int verificador(fila *fila) {
     int cemiterio = 0;
     int proximo = fila->paciente[0].hora*60 + fila->paciente[0].minuto + fila->paciente[0].tempoRestante;
 
-    for(i=0; i<fila->tamanho; i++) {
-        fila->paciente[i].tempoTotal = fila->paciente[i].hora*60 + fila->paciente[i].minuto + fila->paciente[i].tempoRestante;
+    for(i=1; i<fila->tamanho; i++) {
+        fila->paciente[i].tempoTotal = fila->paciente[i].hora*60 + fila->paciente[i].minuto;
+        printf("%d\n", fila->paciente[i].tempoTotal);
     }
 
-    for(i=0; i<fila->tamanho; i++) {
-        if (fila->paciente[i].tempoTotal<=proximo) {
+    for(i=1; i<fila->tamanho; i++) {
+        if (fila->paciente[i].tempoTotal+fila->paciente[i].tempoRestante<=proximo) {
             cemiterio++;
+            printf("%d\n %d\n ", i, proximo);
         }
 
         proximo += 30;
     }
-
+	printf("\n\n");
     return cemiterio;
 }
 
